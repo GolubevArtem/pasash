@@ -1,0 +1,283 @@
+.login_err a {
+    color:#FF0000;
+    text-decoration:none
+}
+
+.login_err a:active {
+    color:#FF0000;
+    text-decoration:none
+}
+
+.login_err a:visited {
+    color:#FF0000;
+    text-decoration:none
+}
+
+.login_err a:hover {
+    color:#FF0000;
+    text-decoration: underline
+}
+
+
+#header {
+    height: 50px;
+    background-color: rgba(26, 127, 199, 0.57);
+}
+
+#centre {
+    width: 100%;
+    position: relative;
+    display: inline-flex;
+}
+.logo {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.search {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    margin-left: 20%;
+
+}
+
+.exit {
+    position: relative;
+    display: inline-block;
+    float: right;
+    padding: 10px 20px;
+}
+
+.left_tree{
+    width: 20%;
+    height: 100%;
+    position: relative;
+    display: inline-flex;
+    line-height: 20px;
+
+
+}
+.left_tree a {
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.list {
+    height: 100%;
+    width: 80%;
+    font-size: 16px;
+    position: relative;
+    display: inline-grid;
+    margin-bottom: 150px;
+    padding-right: 25px;
+
+}
+
+.login {
+    border: 0px solid blue;
+    position:relative;
+    top:100px;
+    left:400px;
+
+}
+
+.new_user {
+    border: 0px solid blue;
+    position:relative;
+    top:100px;
+    left:400px;
+}
+
+#main_form {
+    height: 100%;
+    width: 100%;
+    background: url(../img/back.jpg)100% 100% no-repeat; /* Добавляем фон */
+    background-size: cover; /* Масштабируем фон */
+    background-position: center;
+    position: absolute;
+    top:0px;
+    left:0px;
+}
+
+.login_err {
+    color: red;
+
+
+}
+
+table {
+    width:100%;
+}
+table, th, td, tr {
+    border: 1px solid rgba(84, 84, 84, 0.64);
+    border-collapse: collapse;
+}
+table th, td {
+    padding: 11px;
+    text-align: left;
+}
+table tr:nth-child(even) {
+    background-color: #eee;
+}
+table tr:nth-child(odd) {
+    background-color: #fff;
+}
+table th {
+    background-color: darkgrey;
+    color: white;
+}
+
+td input {
+    font-size: 14px;
+}
+
+.del_head{
+    width: 13px;
+    align-content: center;
+}
+
+.btn {
+    height: 14px;
+    width: 14px;
+    background: url(../img/del.png)100% 100% no-repeat;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.btn:hover {
+    height: 14px;
+    width: 14px;
+    background: url(../img/hover_del.png)100% 100% no-repeat;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+
+.title {
+
+}
+
+.orig {
+    width: 15%;
+    min-width: 110px;
+}
+
+.similar {
+    width: 20%;
+    min-width: 180px;
+
+}
+
+.qnt {
+    width: 10%;
+    min-width: 80px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.minus, .plus {
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+.plus {
+    float: right;
+}
+
+.minus {
+    float: left;
+}
+
+.orig_arrow input{
+    margin: -6px 0;
+    opacity: 0.5;
+}
+
+ /*  модальное окно длбавления аналога  */
+
+#demo-modal {
+    text-align: center;
+
+}
+
+#demo-modal-target {
+    max-width: 550px;
+    text-align: center;
+    color: #FFF;
+
+}
+
+.btn-modal-target {
+    padding: 3px 5px;
+    color: #F0F0F0;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 130px;
+    display: inline-block;
+    font-size: 13px;
+}
+
+#btn-jquery {
+    background: #70ad15;
+}
+
+.modal-text {
+    margin-top: 15px;
+    line-height: 20px;
+    font-size: 1.2em;
+    text-align: left;
+
+}
+
+ /*поиск*/
+
+.search{
+    position:relative;
+}
+
+.search_result{
+    background: #FFF;
+    border: 2px #545454 solid;
+    width: max-content;
+    max-width: 750px;
+    border-radius: 4px;
+    max-height:450px;
+    overflow-y:scroll;
+    display:none;
+
+    position: absolute;
+    z-index: 9999999;
+    box-shadow: 10px 10px rgba(15, 15, 15, 0.5);
+}
+
+.search_result li{
+    list-style: none;
+    padding: 5px 10px;
+    color: #0896D3;
+    border-bottom: 1px #ccc solid;
+    cursor: pointer;
+    transition:0.3s;
+}
+
+.search_result tr:hover{
+    background: #F9FF00;
+}
+.search_result td {
+    min-width: 45px;
+}
+.hid {
+    display: none;
+}
+.who {
+    width: 400px;
+    height: -webkit-fill-available;
+    font-size: 18px;
+}
