@@ -1,7 +1,7 @@
 <?php
 include 'db.php';
 
-$sth = $dbh->prepare("SELECT * FROM `tree`");
+$sth = $dbh->prepare("SELECT * FROM `tree` order by `name_tree`");
 $sth->execute();
 $category = $sth->fetchAll(PDO::FETCH_ASSOC);
 

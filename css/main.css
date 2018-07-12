@@ -1,3 +1,19 @@
+@font-face {
+    font-family: VolvoBroad;
+    src: url(../fonts/VolvoBroad.ttf);
+}
+
+@font-face {
+    font-family: VolvoSerifPro;
+    src: url(../fonts/VolvoSerifPro-BoldItalic.otf);
+}
+
+@font-face {
+    font-family: VolvoPro;
+    src: url(../fonts/VolvoBroadPro.otf);
+}
+
+
 .login_err a {
     color:#FF0000;
     text-decoration:none
@@ -32,8 +48,18 @@
 .logo {
     position: relative;
     display: inline-block;
-    padding: 10px 20px;
-    font-size: 18px;
+    padding: 5px 20px;
+    font-size: 30px;
+    font-family: VolvoSerifPro, cursive;
+    color: #eeeeee;
+}
+
+.foot {
+    position: fixed; /* Фиксированное положение */
+    right: 0; bottom: 0; /* Левый нижний угол */
+    padding: 5px 50px 20px 10px; /* Поля вокруг текста */
+    font-family: VolvoPro, SansSerif;
+    color: #7ab6e1;
 }
 
 .search {
@@ -49,6 +75,12 @@
     display: inline-block;
     float: right;
     padding: 10px 20px;
+
+}
+
+.exit a{
+    color: #eeeeee;
+    text-decoration:none;
 }
 
 .left_tree{
@@ -63,6 +95,7 @@
 .left_tree a {
     text-decoration: none;
     font-weight: 400;
+    color: #2a6690;
 }
 
 .list {
@@ -73,6 +106,7 @@
     display: inline-grid;
     margin-bottom: 150px;
     padding-right: 25px;
+    color: #444444;
 
 }
 

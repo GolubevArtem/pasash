@@ -57,7 +57,7 @@ function out_parts($array)
                 $out .= '</td>';
 
                 // orig cell
-                $out .= '<td contenteditable="true" onKeydown="Javascript: if (event.keyCode==13) entersave(this,\'orig\','.$row["id"].');" onClick="showEdit(this);" >';
+                $out .= '<td class="volvo" contenteditable="true" onKeydown="Javascript: if (event.keyCode==13) entersave(this,\'orig\','.$row["id"].');" onClick="showEdit(this);" >';
                 $out .= $row["orig"];
                 $out .= '</td>';
 

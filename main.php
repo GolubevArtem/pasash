@@ -61,18 +61,45 @@ else
 
 
     <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-        <tr><td colspan="6">Введите название и номер оригинальной запчасти VOLVO</td></tr>
-        <tr><form method="post"><tr><td></td><td><input name="new_title" type="textarea" size="50" maxlength="200" required></td>
-        <td><input name="new_orig" type="text" size="15" maxlength="100" required></td><td></td>
-        <td><input name="new_coment" type="text" size="25" maxlength="255"></td>
-        <td><input name="new_qnt" type="number" size="3" min="1" max="100">&nbsp<input type="submit" value="+"></td></tr></form>
+
+        <?php
+        if( 'getUrl()') {
+
+
+          print  '<tr><td colspan = "6" > Введите название и номер оригинальной запчасти VOLVO </td ></tr >
+        <tr><form method = "post" ><td ></td ><td ><input name = "new_title" type = "textarea" size = "50" maxlength = "200" placeholder="Название детали" required ></td >
+        <td ><input name = "new_orig" type = "text" size = "15" maxlength = "100" placeholder="номер" required ></td ><td ></td >
+        <td ><input name = "new_coment" type = "text" size = "25" maxlength = "255" placeholder="примечание" ></td >
+        <td ><input name = "new_qnt" type = "number" size = "3" min = "1" max = "100" placeholder="кол" >&nbsp<input type = "submit" value = "+" ></td ></tr ></form >';
+        }
+
+        ?>
+
     </td></table>
 </span>
 </div>
 <footer>
+    <div class="foot">
+        ЖИЗНЬ ПРЕКРАСНА, КОГДА МЫ ВМЕСТЕ
+    </div>
 </footer>
 
 <script>
+
+    function getUrl(){
+        var url_s = window.location.search; //.split('=[')[1].split(']')[0];
+
+        console.log(url_s);
+
+//        if (url_s == 1){
+            return false;
+//        }else{
+//            return true;
+//        }
+
+
+
+    }
 
     function entersave(editableObj,column,id)
     {
@@ -156,9 +183,21 @@ else
         jQuery.each(arr, function() {
             var aim = this.outerHTML.split('val="')[1].split('"')[0];
             $('.'+ aim +'').find('.to_del').find('.btn').css( "display", "none" );
+
         })
 
+    })
+</script>
+    <script>
 
+    $(document).ready(function () {
+        var arr2 = $(".table-row");
+        jQuery.each(arr2, function() {
+            var tr_orig = $(this).find('.volvo').text().length;
+            if (tr_orig != 0){
+                $(this).css("background", "#c9e8ff");
+            }
+        })
     })
 
 </script>
