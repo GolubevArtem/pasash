@@ -1,7 +1,7 @@
 <?php
 include 'db.php';
 
-$sth = $dbh->prepare("SELECT * FROM `parts_tree` WHERE parent = :parent ORDER BY `title` ASC");
+$sth = $dbh->prepare("SELECT * FROM `parts_tree` WHERE parent = :parent ORDER BY `title` ASC, `orig` ASC");
 $sth->bindParam(':parent', $_GET['id_tree']);
 $sth->execute();
 $category = $sth->fetchAll(PDO::FETCH_ASSOC);

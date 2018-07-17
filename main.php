@@ -25,9 +25,11 @@ else
     <link rel="stylesheet" href="css/jquery-ui.css">
 
     <script src="js/search.js"></script>
+    <script src="js/search2.js"></script>
     <script src="js/jquery.cookie.js"></script>
 
 
+    <link rel="SHORTCUT ICON" href="img/volvo_l.png" type="image/x-icon">
 </head>
 <body>
 <header>
@@ -63,14 +65,20 @@ else
     <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 
         <?php
-        if( 'getUrl()') {
+        $x = strval($_GET['id_tree']);
+        if( strlen($x) > 3) {
 
 
           print  '<tr><td colspan = "6" > Введите название и номер оригинальной запчасти VOLVO </td ></tr >
-        <tr><form method = "post" ><td ></td ><td ><input name = "new_title" type = "textarea" size = "50" maxlength = "200" placeholder="Название детали" required ></td >
-        <td ><input name = "new_orig" type = "text" size = "15" maxlength = "100" placeholder="номер" required ></td ><td ></td >
+        <tr><form method = "post" ><td ></td ><td ><input name = "new_title" type = "text" size = "50" maxlength = "200" placeholder="Название детали" required ></td >
+        <td ><span class="search2"><input name = "new_orig" type = "text" size = "15" maxlength = "100" placeholder="номер"  class="who2"  autocomplete="off" required >
+        <table class="search_result2"><th></th><th></th><th></th><th></th><th></th></table></span></td >
+        <td ></td >
         <td ><input name = "new_coment" type = "text" size = "25" maxlength = "255" placeholder="примечание" ></td >
         <td ><input name = "new_qnt" type = "number" size = "3" min = "1" max = "100" placeholder="кол" >&nbsp<input type = "submit" value = "+" ></td ></tr ></form >';
+        }
+        else{
+            print '<tr><td colspan = "6" > Выберите категорию слева для внесения или просмотра информации </td ></tr >';
         }
 
         ?>
@@ -86,20 +94,6 @@ else
 
 <script>
 
-    function getUrl(){
-        var url_s = window.location.search; //.split('=[')[1].split(']')[0];
-
-        console.log(url_s);
-
-//        if (url_s == 1){
-            return false;
-//        }else{
-//            return true;
-//        }
-
-
-
-    }
 
     function entersave(editableObj,column,id)
     {

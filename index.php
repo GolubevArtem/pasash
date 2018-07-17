@@ -10,6 +10,7 @@ session_start();?>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/vertica_rhythm.css">
     <script src="js/jquery.cookie.js"></script>
+    <link rel="SHORTCUT ICON" href="img/volvo_l.png" type="image/x-icon">
 </head>
 <body>
 

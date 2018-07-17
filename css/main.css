@@ -37,7 +37,8 @@
 
 #header {
     height: 50px;
-    background-color: rgba(26, 127, 199, 0.57);
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1A7FC7), to(#1A7FC7), color-stop(.5,#8BAFC7));
+
 }
 
 #centre {
@@ -74,7 +75,7 @@
     position: relative;
     display: inline-block;
     float: right;
-    padding: 10px 20px;
+    padding: 17px 20px;
 
 }
 
@@ -89,6 +90,7 @@
     position: relative;
     display: inline-flex;
     line-height: 20px;
+    min-width: 250px;
 
 
 }
@@ -96,6 +98,7 @@
     text-decoration: none;
     font-weight: 400;
     color: #2a6690;
+
 }
 
 .list {
@@ -107,6 +110,7 @@
     margin-bottom: 150px;
     padding-right: 25px;
     color: #444444;
+    min-width: 1000px;
 
 }
 
@@ -150,7 +154,7 @@ table, th, td, tr {
     border-collapse: collapse;
 }
 table th, td {
-    padding: 11px;
+    padding: 11px 4px;
     text-align: left;
 }
 table tr:nth-child(even) {
@@ -169,8 +173,9 @@ td input {
 }
 
 .del_head{
-    width: 13px;
+    width: 10px;
     align-content: center;
+
 }
 
 .btn {
@@ -203,15 +208,20 @@ td input {
     min-width: 110px;
 }
 
+.coment {
+    width: 15%;
+    min-width: 110px;
+}
+
 .similar {
     width: 20%;
-    min-width: 180px;
+    min-width: 130px;
 
 }
 
 .qnt {
     width: 10%;
-    min-width: 80px;
+    min-width:95px;
     font-weight: 900;
     text-align: center;
 }
@@ -314,4 +324,43 @@ td input {
     width: 400px;
     height: -webkit-fill-available;
     font-size: 18px;
+    border-radius: 7px;
+    padding-left: 9px;
+}
+
+/*поиск при вводе нового номера*/
+
+.search2{
+
+}
+
+.search_result2{
+    background: #FFF;
+    border: 2px #545454 solid;
+    width: max-content;
+    max-width: 750px;
+    border-radius: 4px;
+    max-height:450px;
+    overflow-y:scroll;
+    display:none;
+
+    position: absolute;
+    z-index: 9999999;
+    box-shadow: 10px 10px rgba(15, 15, 15, 0.5);
+}
+
+.search_result2 li{
+    list-style: none;
+    padding: 5px 10px;
+    color: #0896D3;
+    border-bottom: 1px #ccc solid;
+    cursor: pointer;
+    transition:0.3s;
+}
+
+.search_result2 tr:hover{
+    background: #F9FF00;
+}
+.search_result2 td {
+    min-width: 45px;
 }
