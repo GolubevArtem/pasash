@@ -153,7 +153,7 @@ else
     function loadDynamicContentModal(id_tree, modal, parent_id){
         var options = {
             modal: true,
-            height:350,
+            height:450,
             width:550
         };
         $('#demo-modal').load('get-dynamic-content.php?modal='+modal+'&parent_id='+parent_id+'&id_tree='+id_tree).dialog(options).dialog('open');
