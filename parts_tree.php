@@ -1,7 +1,7 @@
 <?php
 include 'db.php';
 
-$sth = $dbh->prepare("SELECT * FROM `parts_tree` WHERE parent = :parent ORDER BY `title` ASC, `orig` ASC");
+$sth = $dbh->prepare("SELECT * FROM `parts_tree` WHERE parent = :parent ORDER BY `title` ASC, LENGTH (`orig`) ASC, `orig` ASC");
 $sth->bindParam(':parent', $_GET['id_tree']);
 $sth->execute();
 $category = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -89,9 +89,29 @@ function out_parts($array)
             $out .= '</td>';
 
             $out .= '<td class="qnt"><button class="minus" onclick="qntchange(' . $row["id"] . ', -1)"><input type="image" src="img/minus.png" alt="minus" width="12" height="12"></button>&nbsp ';// строка для версии с кнопками
+
+// qnt change by enter
+
+            $out .= '<span class="qnt_on_fly" contenteditable="true" onKeydown="Javascript: if (event.keyCode==13) entersave(this,\'qnt\','.$row["id"].');" onClick="showEdit(this);">';///
             $out .= $row["qnt"];
+            $out .= '</span>';/////
+
+
+
+
+
             $out .= '&nbsp<button class="plus" onclick="qntchange(' . $row["id"] . ', 1)"><input type="image" src="img/plus.png" alt="plus" width="12" height="12"></button>'; // строка для версии с кнопками
             $out .= '</td>';
+
+
+            // price
+
+            $out .= '<td class="price" contenteditable="true" onKeydown="Javascript: if (event.keyCode==13) entersave(this,\'price\','.$row["id"].');" onClick="showEdit(this);">';
+            $out .= $row["price"];
+            $out .= '</td>';
+
+
+            //
 
             $out .= '</tr>';
 
@@ -154,6 +174,13 @@ function add_part($dbh, $parent_id, $id_tree)
         $parent_id = 0;
     }
 
+    if (isset($_POST['new_price'])) {
+        $price = $_POST['new_price'];
+        if ($price == '') {
+            unset($price);
+        }
+    }
+
     $title = stripslashes($title);
     $title = htmlspecialchars($title);
     $title = trim($title);
@@ -170,11 +197,15 @@ function add_part($dbh, $parent_id, $id_tree)
     $coment = htmlspecialchars($coment);
     $coment = trim($coment);
 
+    $price = stripslashes($price);
+    $price = htmlspecialchars($price);
+    $price = trim($price);
+
     if (empty($id_tree)){
         echo ("<script>window.alert( 'Выберите категорию !!!')</script>");
     }
     else{
-        $add = $dbh->prepare("INSERT INTO `parts_tree`(`parent`,`parent_id`, `title`, `orig`, `similar`,  `coment` ,  `qnt`) VALUES (:parent, :parent_id,  :title, :orig, :similar, :coment, :qnt)");
+        $add = $dbh->prepare("INSERT INTO `parts_tree`(`parent`,`parent_id`, `title`, `orig`, `similar`,  `coment` ,  `qnt`,  `price`) VALUES (:parent, :parent_id,  :title, :orig, :similar, :coment, :qnt, :price)");
         $add->bindParam(':parent', $id_tree);
         $add->bindParam(':parent_id',  $parent_id);
         $add->bindParam(':title', $title);
@@ -182,6 +213,7 @@ function add_part($dbh, $parent_id, $id_tree)
         $add->bindParam(':similar', $similar);
         $add->bindParam(':coment', $coment);
         $add->bindParam(':qnt', $qnt);
+        $add->bindParam(':price', $price);
         $add->execute();
 
         unset($_POST);

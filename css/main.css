@@ -85,15 +85,13 @@ background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1A7FC7), to(#1A7FC7),
 }
 
 .left_tree{
-    width: 20%;
     height: 100%;
     position: relative;
     display: inline-flex;
     line-height: 20px;
-    min-width: 250px;
-
-
+    width: 252px;
 }
+
 .left_tree a {
     text-decoration: none;
     font-weight: 400;
@@ -223,6 +221,16 @@ td input {
     width: 10%;
     min-width:95px;
     font-weight: 900;
+    text-align: center;
+}
+
+.qnt_on_fly{
+  padding: 2px 8px;
+
+}
+
+.price {
+    min-width: 100px;
     text-align: center;
 }
 

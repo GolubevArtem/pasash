@@ -13,14 +13,23 @@ if(!empty($_POST["referal"])) {
 	$search = stripslashes($search);
 	$search = htmlspecialchars($search);
 	$search = trim($search);
+	$post_search = "";
+	$arr1 = str_split($search);
+	foreach($arr1 as $elem){
+		$post_search = $post_search. $elem ."%";
+	}
+
 	$ser = $dbh->prepare("
 select * from `parts_tree`
-where `orig` like '%{$search}%'
-or `similar` like '%{$search}%'
-or `title` like '%{$search}%'
-or `coment` like '%{$search}%'
+where `orig` like '%{$post_search}'
+or `similar` like '%{$post_search}'
+or `title` like '%{$post_search}'
+or `coment` like '%{$post_search}'
 limit 10 ");
 	$ser->execute();
+
+//	print_r ($ser);
+//   print_r ($ser->errorInfo());
 
 	$s_result = $ser->fetchAll(PDO::FETCH_ASSOC);
 	$result_search = array();

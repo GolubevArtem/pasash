@@ -47,12 +47,30 @@ session_start();
 
         include 'db.php';
 
+// проверить есть ли такой пользователь, если есть update pass если нет, то insert
 
-        $add = $dbh->prepare("INSERT INTO users (users_login, users_password) VALUES (:name , :pass)");
-        $add->bindParam(':name', $login);
-        $add->bindParam(':pass', $password);
-        $add->execute();
+        $user_check = $dbh->prepare("SELECT * FROM users WHERE users_login = '".$login."' LIMIT 1");
+        $user_check->execute();
+        $users_arr = $user_check->fetch(PDO::FETCH_ASSOC);
 
+        if (false ) {
+
+            $upd = $dbh->prepare("UPDATE users SET users_password = :pass WHERE users_login = :name ");
+            $upd->bindParam(':name', $login);
+            $upd->bindParam(':pass', $password);
+            $upd->execute();
+
+        }
+
+
+
+
+else {
+    $add = $dbh->prepare("INSERT INTO users (users_login, users_password) VALUES (:name , :pass)");
+    $add->bindParam(':name', $login);
+    $add->bindParam(':pass', $password);
+    $add->execute();
+}
 
         $result = $dbh->prepare("SELECT * FROM users WHERE users_login = '".$login."' LIMIT 1");
         $result->execute();
