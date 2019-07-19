@@ -83,7 +83,7 @@ function out_parts($array)
                 $out .= $row["similar"];
                 $out .= '</td>';
             }
-
+// comment
             $out .= '<td contenteditable="true" onKeydown="Javascript: if (event.keyCode==13) entersave(this,\'coment\','.$row["id"].');" onClick="showEdit(this);">';
             $out .= $row["coment"];
             $out .= '</td>';
@@ -111,7 +111,15 @@ function out_parts($array)
             $out .= '</td>';
 
 
-            //
+            // warehouse
+
+            $out .='<td class="warehouse"><form><select name = "new_warehouse" onchange="changewarehouse(this.value,\'warehouse\','.$row["id"].')">';
+            if ($row["warehouse"] == "w1") {
+                $out .= '<option  value = "w1" selected>Склад 1</option><option  value = "w2">Склад 2</option></select></form>';
+            }else {
+                $out .= '<option  value = "w1">Склад 1</option><option  value = "w2" selected>Склад 2</option></select></form>';
+            }
+            $out .= '</td>';
 
             $out .= '</tr>';
 
@@ -130,6 +138,9 @@ function out_parts($array)
 
 if($_SERVER['REQUEST_METHOD']=='POST')
 {
+    print_r ($_POST['new_warehouse']);
+    print_r ($_POST['neparent_idw_warehouse']);
+    print_r ($_GET['id_tree']);
 
     add_part($dbh, $_POST['parent_id'], $_GET['id_tree']);
 
@@ -181,6 +192,13 @@ function add_part($dbh, $parent_id, $id_tree)
         }
     }
 
+    if (isset($_POST['new_warehouse'])) {
+        $warehouse = $_POST['new_warehouse'];
+        if ($warehouse == '') {
+            unset($warehouse);
+        }
+    }
+
     $title = stripslashes($title);
     $title = htmlspecialchars($title);
     $title = trim($title);
@@ -205,7 +223,7 @@ function add_part($dbh, $parent_id, $id_tree)
         echo ("<script>window.alert( 'Выберите категорию !!!')</script>");
     }
     else{
-        $add = $dbh->prepare("INSERT INTO `parts_tree`(`parent`,`parent_id`, `title`, `orig`, `similar`,  `coment` ,  `qnt`,  `price`) VALUES (:parent, :parent_id,  :title, :orig, :similar, :coment, :qnt, :price)");
+        $add = $dbh->prepare("INSERT INTO `parts_tree`(`parent`,`parent_id`, `title`, `orig`, `similar`,  `coment` ,  `qnt`,  `price`,  `warehouse`) VALUES (:parent, :parent_id,  :title, :orig, :similar, :coment, :qnt, :price, :warehouse)");
         $add->bindParam(':parent', $id_tree);
         $add->bindParam(':parent_id',  $parent_id);
         $add->bindParam(':title', $title);
@@ -214,13 +232,14 @@ function add_part($dbh, $parent_id, $id_tree)
         $add->bindParam(':coment', $coment);
         $add->bindParam(':qnt', $qnt);
         $add->bindParam(':price', $price);
+        $add->bindParam(':warehouse', $warehouse);
         $add->execute();
 
         unset($_POST);
-       // print_r ($add);
-      //  print_r ($add->errorInfo());
+        print_r ($add);
+        print_r ($add->errorInfo());
 
-        echo "<meta http-equiv='refresh' content='1'>";
+       # echo "<meta http-equiv='refresh' content='1'>";
     }
 }
 

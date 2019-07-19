@@ -56,6 +56,7 @@ else
             <th class="coment">Примечание</th>
             <th class="qnt">кол-во</th>
             <th class="price">цена за ед</th>
+            <th class="warehouse">склад</th>
         </tr>
         <tr>
 
@@ -63,24 +64,31 @@ else
             <?php include 'parts_tree.php'; ?>
 
 
-    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 
         <?php
         $x = strval($_GET['id_tree']);
         if( strlen($x) > 3) {
 
 
-          print  '<tr><td colspan = "7" > Введите название и номер оригинальной запчасти VOLVO </td ></tr >
+          print  '<tr><td colspan = "8" > Введите название и номер оригинальной запчасти VOLVO </td ></tr >
         <tr><form method = "post" ><td ></td ><td ><input name = "new_title" type = "text" size = "50" maxlength = "200" placeholder="Название детали" required ></td >
         <td ><span class="search2"><input name = "new_orig" type = "text" size = "15" maxlength = "100" placeholder="номер"  class="who2"  autocomplete="off" required >
         <table class="search_result2"><th></th><th></th><th></th><th></th><th></th></table></span></td >
         <td ></td >
         <td ><input name = "new_coment" type = "text" size = "25" maxlength = "255" placeholder="примечание" ></td >
         <td ><input name = "new_qnt" type = "number" size = "3" min = "1" max = "999" placeholder="кол" ></td >
-        <td ><input name = "new_price" type = "number" step=".01" maxlength = "7" style="width: 60px;" placeholder="цена" >&nbsp<input type = "submit" value = "+" ></td ></tr ></form >';
+        <td ><input name = "new_price" type = "number" step=".01" maxlength = "7" style="width: 60px;" placeholder="цена" ></td >
+
+        <td><select name = "new_warehouse">
+                <option value = "w1">Склад 1</option>
+                <option value= "w2">Склад 2</option>
+            </select>&nbsp<input type = "submit" value = "+" ></td></tr ></form >';
+
+
         }
         else{
-            print '<tr><td colspan = "7" > Выберите категорию слева для внесения или просмотра информации </td ></tr >';
+            print '<tr><td colspan = "8" > Выберите категорию слева для внесения или просмотра информации </td ></tr >';
         }
 
         ?>
@@ -99,9 +107,23 @@ else
 
     function entersave(editableObj,column,id)
     {
-
-
         saveToDatabase(editableObj,column,id);
+    }
+
+    function changewarehouse(editableObj,column,id)
+    {
+        console.log(editableObj);
+
+        $.ajax({
+            url: "saveedit.php",
+            type: "POST",
+            data:'column='+column+'&editval='+editableObj+'&id='+id,
+            success: function(data){
+                $(editableObj).css("background","#7fffd4");
+                setTimeout("window.location.reload(true);", 30);
+            }
+        });
+
     }
 
 // вход в редактирование
