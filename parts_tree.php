@@ -88,21 +88,24 @@ function out_parts($array)
             $out .= $row["coment"];
             $out .= '</td>';
 
-            $out .= '<td class="qnt"><button class="minus" onclick="qntchange(' . $row["id"] . ', -1)"><input type="image" src="img/minus.png" alt="minus" width="12" height="12"></button>&nbsp ';// строка для версии с кнопками
+
 
 // qnt change by enter
 
+            $out .= '<td class="qnt"><button class="minus" onclick="qntchange(' . $row["id"] . ', -1)"><input type="image" src="img/minus.png" alt="minus" width="12" height="12"></button>&nbsp ';// строка для версии с кнопками
             $out .= '<span class="qnt_on_fly" contenteditable="true" onKeydown="Javascript: if (event.keyCode==13) entersave(this,\'qnt\','.$row["id"].');" onClick="showEdit(this);">';///
             $out .= $row["qnt"];
             $out .= '</span>';/////
-
-
-
-
-
             $out .= '&nbsp<button class="plus" onclick="qntchange(' . $row["id"] . ', 1)"><input type="image" src="img/plus.png" alt="plus" width="12" height="12"></button>'; // строка для версии с кнопками
             $out .= '</td>';
 
+// qnt2 change by enter
+            $out .= '<td class="qnt"><button class="minus" onclick="qntchange2(' . $row["id"] . ', -1)"><input type="image" src="img/minus.png" alt="minus" width="12" height="12"></button>&nbsp ';
+            $out .= '<span class="qnt_on_fly" contenteditable="true" onKeydown="Javascript: if (event.keyCode==13) entersave(this,\'qnt2\','.$row["id"].');" onClick="showEdit(this);">';///
+            $out .= $row["qnt2"];
+            $out .= '</span>';/////
+            $out .= '&nbsp<button class="plus" onclick="qntchange2(' . $row["id"] . ', 1)"><input type="image" src="img/plus.png" alt="plus" width="12" height="12"></button>'; // строка для версии с кнопками
+            $out .= '</td>';
 
             // price
 
@@ -113,13 +116,13 @@ function out_parts($array)
 
             // warehouse
 
-            $out .='<td class="warehouse"><form><select name = "new_warehouse" onchange="changewarehouse(this.value,\'warehouse\','.$row["id"].')">';
-            if ($row["warehouse"] == "w1") {
-                $out .= '<option  value = "w1" selected>Склад 1</option><option  value = "w2">Склад 2</option></select></form>';
-            }else {
-                $out .= '<option  value = "w1">Склад 1</option><option  value = "w2" selected>Склад 2</option></select></form>';
-            }
-            $out .= '</td>';
+            //$out .='<td class="warehouse"><form><select name = "new_warehouse" onchange="changewarehouse(this.value,\'warehouse\','.$row["id"].')">';
+            //if ($row["warehouse"] == "w1") {
+             //   $out .= '<option  value = "w1" selected>Склад 1</option><option  value = "w2">Склад 2</option></select></form>';
+            //}else {
+             //   $out .= '<option  value = "w1">Склад 1</option><option  value = "w2" selected>Склад 2</option></select></form>';
+            //}
+            //$out .= '</td>';
 
             $out .= '</tr>';
 
@@ -138,9 +141,6 @@ function out_parts($array)
 
 if($_SERVER['REQUEST_METHOD']=='POST')
 {
-    print_r ($_POST['new_warehouse']);
-    print_r ($_POST['neparent_idw_warehouse']);
-    print_r ($_GET['id_tree']);
 
     add_part($dbh, $_POST['parent_id'], $_GET['id_tree']);
 
@@ -181,6 +181,13 @@ function add_part($dbh, $parent_id, $id_tree)
         }
     }
 
+    if (isset($_POST['new_qnt2'])) {
+        $qnt2 = intval($_POST['new_qnt2']);
+        if ($qnt2 == '') {
+            $qnt2 = 0;
+        }
+    }
+
     if ( $parent_id == NULL) {
         $parent_id = 0;
     }
@@ -192,12 +199,12 @@ function add_part($dbh, $parent_id, $id_tree)
         }
     }
 
-    if (isset($_POST['new_warehouse'])) {
-        $warehouse = $_POST['new_warehouse'];
-        if ($warehouse == '') {
-            unset($warehouse);
-        }
-    }
+//    if (isset($_POST['new_warehouse'])) {
+//        $warehouse = $_POST['new_warehouse'];
+//        if ($warehouse == '') {
+//            unset($warehouse);
+//        }
+//    }
 
     $title = stripslashes($title);
     $title = htmlspecialchars($title);
@@ -223,7 +230,7 @@ function add_part($dbh, $parent_id, $id_tree)
         echo ("<script>window.alert( 'Выберите категорию !!!')</script>");
     }
     else{
-        $add = $dbh->prepare("INSERT INTO `parts_tree`(`parent`,`parent_id`, `title`, `orig`, `similar`,  `coment` ,  `qnt`,  `price`,  `warehouse`) VALUES (:parent, :parent_id,  :title, :orig, :similar, :coment, :qnt, :price, :warehouse)");
+        $add = $dbh->prepare("INSERT INTO `parts_tree`(`parent`,`parent_id`, `title`, `orig`, `similar`,  `coment` ,  `qnt`,  `qnt2`,  `price`) VALUES (:parent, :parent_id,  :title, :orig, :similar, :coment, :qnt, :qnt2, :price)");
         $add->bindParam(':parent', $id_tree);
         $add->bindParam(':parent_id',  $parent_id);
         $add->bindParam(':title', $title);
@@ -231,15 +238,15 @@ function add_part($dbh, $parent_id, $id_tree)
         $add->bindParam(':similar', $similar);
         $add->bindParam(':coment', $coment);
         $add->bindParam(':qnt', $qnt);
+        $add->bindParam(':qnt2', $qnt2);
         $add->bindParam(':price', $price);
-        $add->bindParam(':warehouse', $warehouse);
         $add->execute();
 
         unset($_POST);
-        print_r ($add);
-        print_r ($add->errorInfo());
+       // print_r ($add);
+       // print_r ($add->errorInfo());
 
-       # echo "<meta http-equiv='refresh' content='1'>";
+        echo "<meta http-equiv='refresh' content='1'>";
     }
 }
 

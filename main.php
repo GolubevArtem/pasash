@@ -54,9 +54,9 @@ else
             <th class="orig">оригинальный номер</th>
             <th class="similar">аналоги</th>
             <th class="coment">Примечание</th>
-            <th class="qnt">кол-во</th>
+            <th class="qnt">Склад 1</th>
+            <th class="qnt">Склад 2</th>
             <th class="price">цена за ед</th>
-            <th class="warehouse">склад</th>
         </tr>
         <tr>
 
@@ -77,13 +77,11 @@ else
         <table class="search_result2"><th></th><th></th><th></th><th></th><th></th></table></span></td >
         <td ></td >
         <td ><input name = "new_coment" type = "text" size = "25" maxlength = "255" placeholder="примечание" ></td >
-        <td ><input name = "new_qnt" type = "number" size = "3" min = "1" max = "999" placeholder="кол" ></td >
-        <td ><input name = "new_price" type = "number" step=".01" maxlength = "7" style="width: 60px;" placeholder="цена" ></td >
+        <td ><input name = "new_qnt" type = "number" size = "8" min = "1" max = "99999" placeholder="Скл_1" ></td >
+        <td ><input name = "new_qnt2" type = "number" size = "8" min = "1" max = "99999" placeholder="Скл_2" ></td >
+        <td ><input name = "new_price" type = "number" step=".01" maxlength = "7" style="width: 60px;" placeholder="цена" >&nbsp<input type = "submit" value = "+" ></td >
 
-        <td><select name = "new_warehouse">
-                <option value = "w1">Склад 1</option>
-                <option value= "w2">Склад 2</option>
-            </select>&nbsp<input type = "submit" value = "+" ></td></tr ></form >';
+        </tr ></form >';
 
 
         }
@@ -110,21 +108,6 @@ else
         saveToDatabase(editableObj,column,id);
     }
 
-    function changewarehouse(editableObj,column,id)
-    {
-        console.log(editableObj);
-
-        $.ajax({
-            url: "saveedit.php",
-            type: "POST",
-            data:'column='+column+'&editval='+editableObj+'&id='+id,
-            success: function(data){
-                $(editableObj).css("background","#7fffd4");
-                setTimeout("window.location.reload(true);", 30);
-            }
-        });
-
-    }
 
 // вход в редактирование
     function showEdit(editableObj) {
@@ -157,7 +140,21 @@ else
             }
         });
     }
-// удалить запчасть
+    // изменить количество 2
+    function qntchange2(id,change) {
+        $.ajax({
+            url: "qntchange.php",
+            type: "POST",
+            data:'&id='+id+'&qnt2='+change,
+            success: function(data){
+                setTimeout("window.location.reload(true);", 10);
+            }
+        });
+    }
+
+
+
+    // удалить запчасть
     function delete_pos(id) {
         if (window.confirm("ДЕЙСТВИТЕЛЬНО УДАЛИТЬ?")) {
             $.ajax({
